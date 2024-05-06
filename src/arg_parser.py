@@ -9,8 +9,6 @@ class ArgParser:
         self.parser.add_argument("--file_count", help="Number of files to be created, default 0 prints data in the console",
                                   type=int)
         self.parser.add_argument("--file_name", help="Default name: file", type=str)
-        self.parser.add_argument("--file_prefix", help="Choose an option to create file prefixes",
-                                  choices=["count", "random", "uuid"])
         self.parser.add_argument("--strategy", help="Choose an option to generate files",
                                   choices=["random", "sequential", "fixed"])
         self.parser.add_argument("--data_schema", help="Provide data schema either in terminal or path to file")

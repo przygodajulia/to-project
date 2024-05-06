@@ -12,11 +12,12 @@ class ArgProcessor:
     
     def __init__(self, args):
         self.args = args
-        self._process_arguments()
 
-    def _process_arguments(self):
+    def process_arguments(self):
+    
         self._validate_file_path()
         self._validate_file_count()
+        self._validate_line_count()
         self._validate_strategy()
         self._validate_multiprocessing()
 
@@ -35,9 +36,16 @@ class ArgProcessor:
 
     def _validate_file_count(self):
         self.file_count = self.args.get("file_count", 0)
-        if self.file_count < 0:
+        if self.file_count <= 0:
             logging.error("Number of files cannot be a negative value")
             sys.exit()
+
+    def _validate_line_count(self):
+        self.data_lines = self.args.get("data_lines", 0)
+        if self.data_lines <= 0:
+            logging.error("Number of lines cannot be a negative value")
+            sys.exit()
+
 
     def _validate_multiprocessing(self):
         self.multiprocessing = self.args.get("multiprocessing", os.cpu_count())

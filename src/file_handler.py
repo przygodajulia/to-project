@@ -56,17 +56,9 @@ class FileHandler(metaclass=SingletonMeta):
         num_files = self.args_dict["file_count"]
         file_name = self.args_dict["file_name"]
         data_lines = self.args_dict["data_lines"]
-        file_prefix = self.args_dict["file_prefix"]
 
         for i in range(num_files):
-            if file_prefix == "count":
-                prefix_value = i
-            elif file_prefix == "random":
-                prefix_value = random.randint(1, num_files * 100)
-            elif file_prefix == "uuid":
-                prefix_value = uuid.uuid4()
-            else:
-                prefix_value = ""
+            prefix_value = i
 
             file_data = []
             for j in range(data_lines):
@@ -77,12 +69,19 @@ class FileHandler(metaclass=SingletonMeta):
 
     def write_files_multiprocessing(self):
         """Write files using multiprocessing."""
-        self.create_files()
-        # TODO 
-        # multiprocessing_count = self.args_dict["multiprocessing"]
-        # max_tasks = max(math.ceil(self.args_dict["file_count"] / multiprocessing_count), 1)
-        # with multiprocessing.Pool(self.multiprocessing) as pool:
-        #     _ = pool.starmap_async(self.create_files, chunksize=max_tasks)
-        #     pool.close()
-        #     pool.join()
-        #     logging.info("Generating files finished")
+       
+        multiprocessing_count = self.args_dict.get("multiprocessing", 1)
+        
+        if multiprocessing_count > 1:
+            with multiprocessing.Pool(multiprocessing_count) as pool:
+                tasks = []
+                for _ in range(self.args_dict["file_count"]):
+                    tasks.append(pool.apply_async(self.create_files, ()))
+
+                for task in tasks:
+                    task.get()
+        else:
+            self.create_files()
+
+        logging.info("Generating files finished")
+

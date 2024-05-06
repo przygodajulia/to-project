@@ -12,6 +12,7 @@ class DataGenerator:
     def __init__(self, schema, strategy):
         self.schema = schema
         self.strategy = strategy
+        self.increment_val = 0
 
     def generate_data(self):
         strategy = self._get_strategy()
@@ -21,7 +22,8 @@ class DataGenerator:
         if self.strategy == "random":
             return RandomDataStrategy(self.schema)
         elif self.strategy == "sequential":
-            return SequentialDataStrategy(self.schema)
+            self.increment_val += 1
+            return SequentialDataStrategy(self.schema, self.increment_val)
         elif self.strategy == "fixed":
             return FixedValueDataStrategy(self.schema)
 
@@ -54,15 +56,14 @@ class RandomDataStrategy(BaseDataStrategy):
 class SequentialDataStrategy(BaseDataStrategy):
     """Generate data sequentially based on the schema."""
 
-    def __init__(self, schema):
+    def __init__(self, schema, current_value):
         super().__init__(schema)
-        self.current_value = 0
+        self.current_value = current_value
 
     def generate(self):
         data = {}
         for key, value in self.schema.items():
             data[key] = self._generate_value(value)
-        self.current_value += 1
         return data
 
     def _generate_value(self, data_type):
@@ -72,20 +73,29 @@ class SequentialDataStrategy(BaseDataStrategy):
             return self.current_value
         elif data_type == "str":
             return str(uuid.uuid4())
+        
+
 
 class FixedValueDataStrategy(BaseDataStrategy):
-    """Generate data with fixed values for each field."""
+    """Generate data with fixed values for integer fields."""
 
-    def __init__(self, schema, fixed_values):
+    def __init__(self, schema):
         super().__init__(schema)
-        self.fixed_values = fixed_values
+        self.current_value = 1
 
     def generate(self):
         data = {}
         for key, value in self.schema.items():
-            if key in self.fixed_values:
-                data[key] = self.fixed_values[key]
-            else:
-                data[key] = self._generate_value(value)
+            data[key] = self._generate_value(value)
         return data
+
+    def _generate_value(self, data_type):
+        if data_type == "timestamp":
+            return str(time.time())
+        elif data_type == "int":
+            return self.current_value
+        elif data_type == "str":
+            return str(uuid.uuid4())
+
+ 
 
