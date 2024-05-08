@@ -2,6 +2,14 @@ import time
 import functools
 
 class ExecutionTimeDecorator:
+    """
+    A decorator class to measure the execution time of a function.
+
+    Attributes:
+        func (function): The function to be decorated.
+
+    """
+    
     def __init__(self, func):
         self.func = func
         functools.update_wrapper(self, func)

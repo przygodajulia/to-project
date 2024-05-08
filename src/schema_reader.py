@@ -7,6 +7,19 @@ class SchemaReader:
     """
     Reads the data schema from a file or string.
     Provides methods to retrieve the parsed schema.
+
+    Attributes:
+        data_schema (str): The data schema provided as a file path or a JSON string.
+
+    Methods:
+        read_schema: Reads and parses the data schema from either a file or a string.
+        _read_schema_from_file: Reads the data schema from a file.
+        _parse_schema_from_string: Parses the data schema from a JSON string.
+
+    Example:
+        data_schema = '{"name": "string", "age": "int", "city": "string"}'
+        schema_reader = SchemaReader(data_schema)
+        schema = schema_reader.read_schema()
     """
 
     def __init__(self, data_schema):

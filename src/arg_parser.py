@@ -1,12 +1,27 @@
 import argparse
 
 class ArgParser:
+    """
+    A class for parsing command-line arguments related to data generation.
+
+    Attributes:
+        parser (argparse.ArgumentParser): An ArgumentParser object for parsing command-line arguments.
+
+    Methods:
+        add_arguments: Adds command-line arguments to the parser.
+
+    Example:
+        arg_parser = ArgParser()
+        arg_parser.add_arguments()
+        args = arg_parser.parser.parse_args()
+    """
+
     def __init__(self):
         self.parser = argparse.ArgumentParser(prog="data_generator", description="Collect arguments provided in the command-line.")
 
     def add_arguments(self):
         self.parser.add_argument("file_path", help="Provide path to an existing directory")
-        self.parser.add_argument("--file_count", help="Number of files to be created, default 0 prints data in the console",
+        self.parser.add_argument("--file_count", help="Number of files to be created",
                                   type=int)
         self.parser.add_argument("--file_name", help="Default name: file", type=str)
         self.parser.add_argument("--strategy", help="Choose an option to generate files",

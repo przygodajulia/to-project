@@ -18,6 +18,18 @@ class SingletonMeta(type):
         return cls._instances[cls]
 
 class Factory:
+    """
+    A factory class for creating objects dynamically based on keys.
+    This class provides a mechanism for registering and creating objects based on a key.
+
+    Attributes:
+        _factories (dict): A dictionary to hold factory functions.
+
+    Methods:
+        register: Registers a factory function for a given key.
+        create: Creates an object using the registered factory function for the specified key.
+    """
+    
     _factories = {}
 
     @classmethod

@@ -1,7 +1,6 @@
 from src.factory import Factory
 from src.timer import ExecutionTimeDecorator
 import logging
-import os
 
 logging.getLogger().setLevel(logging.INFO)
 

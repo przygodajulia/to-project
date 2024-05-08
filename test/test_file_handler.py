@@ -4,7 +4,6 @@ import os
 import sys
 import json
 sys.path.append(os.getcwd())
-sys.path.append('/Users/juliaprzygoda/Desktop/to-project-repo/to-project')
 from src.file_handler import FileHandler
 
 @pytest.fixture

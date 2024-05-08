@@ -6,9 +6,31 @@ logging.getLogger().setLevel(logging.INFO)
 
 class ArgProcessor:
     """
-        Initialize the argument processing logic and validate the arguments.
-        Provide methods to retrieve validated arguments.
+    A class for processing and validating command-line arguments related to data generation task.
+
+    Attributes:
+        args (dict): A dictionary containing parsed command-line arguments.
+
+    Methods:
+        process_arguments: Processes and validates command-line arguments.
+        _validate_file_path: Validates the provided file path.
+        _validate_file_count: Validates the provided file count.
+        _validate_line_count: Validates the number of lines.
+        _validate_multiprocessing: Validates the multiprocessing value.
+        _validate_strategy: Validates the generation strategy provided in the arguments.
+        get_file_path: Returns the validated file path.
+        get_file_count: Returns the validated file count.
+        get_multiprocessing: Returns the validated multiprocessing value.
+        get_validated_args: Returns the validated arguments dictionary.
+        __repr__: Returns a string representation of the ArgProcessor object.
+
+    Example:
+        args = {'file_path': '/path/to/directory', 'file_count': 10, 'data_lines': 100, 'strategy': 'random', 'multiprocessing': 4}
+        arg_processor = ArgProcessor(args)
+        arg_processor.process_arguments()
+        file_path = arg_processor.get_file_path()
     """
+
     
     def __init__(self, args):
         self.args = args

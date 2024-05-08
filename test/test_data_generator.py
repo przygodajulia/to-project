@@ -2,7 +2,6 @@ import pytest
 import os
 import sys
 sys.path.append(os.getcwd())
-sys.path.append('/Users/juliaprzygoda/Desktop/to-project-repo/to-project')
 from src.data_generator import DataGenerator, RandomDataStrategy, SequentialDataStrategy, FixedValueDataStrategy
 
 @pytest.fixture

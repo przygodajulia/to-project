@@ -3,7 +3,6 @@ from argparse import Namespace
 import os
 import sys
 sys.path.append(os.getcwd())
-sys.path.append('/Users/juliaprzygoda/Desktop/to-project-repo/to-project')
 from src.factory import Factory
 from src.arg_parser import ArgParser
 from src.config_manager import ConfigManager

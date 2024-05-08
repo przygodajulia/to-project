@@ -1,12 +1,25 @@
-import json
 import random
 import time
 import uuid
 
 class DataGenerator:
     """
-    Generate test data based on the provided schema and options.
-    Utilizes the Strategy Pattern for flexible schema handling.
+    A class for generating data based on a specified schema and strategy.
+
+    Attributes:
+        schema (str): The data schema used for generating data.
+        strategy (str): The generation strategy to be applied.
+        increment_val (int): Value used for sequential data generation.
+
+    Methods:
+        generate_data: Generates data based on the specified schema and strategy.
+        _get_strategy: Retrieves the appropriate strategy.
+
+    Example:
+        schema = '{"name": "str", "age": "int", "city": "str"}'
+        strategy = 'random'
+        data_generator = DataGenerator(schema, strategy)
+        generated_data = data_generator.generate_data()
     """
 
     def __init__(self, schema, strategy):
