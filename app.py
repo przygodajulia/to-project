@@ -1,6 +1,7 @@
 from src.factory import Factory
 from src.timer import ExecutionTimeDecorator
 import logging
+import os
 
 logging.getLogger().setLevel(logging.INFO)
 
@@ -21,7 +22,6 @@ def app():
     argument_manager.data_lines = args.data_lines or config_manager.get_config_value("DEFAULT", "data_lines")
     argument_manager.multiprocessing = args.multiprocessing or config_manager.get_config_value("DEFAULT", "multiprocessing")
 
-    # TODO -> ArgProcessor should also validate line count
     collected_args = argument_manager.__dict__
     print(" >> Arguments collected:")
     print(collected_args)

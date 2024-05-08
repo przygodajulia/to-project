@@ -13,14 +13,14 @@ class SchemaReader:
         self.data_schema = data_schema
 
     def read_schema(self):
-        if os.path.isfile(self.data_schema):
+        if os.path.isfile(f"{os.getcwd()}{self.data_schema}"):
             return self._read_schema_from_file()
         else:
             return self._parse_schema_from_string()
 
     def _read_schema_from_file(self):
         try:
-            with open(self.data_schema, 'r') as file:
+            with open( f"{os.getcwd()}{self.data_schema}", 'r') as file:
                 schema = json.load(file)
             return schema
         except Exception as e:

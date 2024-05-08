@@ -85,3 +85,7 @@ class FileHandler(metaclass=SingletonMeta):
 
         logging.info("Generating files finished")
 
+    @classmethod
+    def reset(cls):
+        cls._instances = {}
+
